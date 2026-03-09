@@ -616,6 +616,57 @@ body.is-loaded .loading-screen {
 }
 
 /* ==========================================================================
+   Message Section (Story Copy)
+   ========================================================================== */
+
+.message {
+    padding: 120px 0;
+    background-color: var(--theme-bg);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.message-inner {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.message-text {
+    font-size: 18px;
+    line-height: 2.6;
+    font-weight: 400;
+    color: var(--color-text);
+    letter-spacing: 0.08em;
+    font-family: var(--font-jp);
+}
+
+.message-highlight {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-primary);
+    display: inline-block;
+    margin: 40px 0;
+    letter-spacing: 0.1em;
+    background: linear-gradient(transparent 60%, rgba(247, 192, 45, 0.2) 60%);
+}
+
+@media (max-width: 768px) {
+    .message {
+        padding: 80px 0;
+    }
+    .message-text {
+        font-size: 15px;
+        line-height: 2.2;
+        text-align: left;
+    }
+    .message-highlight {
+        font-size: 24px;
+        margin: 30px 0;
+    }
+}
+
+/* ==========================================================================
    Business Section (Marquee)
    ========================================================================== */
 
@@ -1076,6 +1127,53 @@ body.is-loaded .loading-screen {
 @media (max-width: 768px) {
     .recruit-row { flex-direction: column; }
     .recruit-copy { font-size: 24px; }
+}
+
+/* ==========================================================================
+   Closing Message Section
+   ========================================================================== */
+
+.closing-message {
+    background-color: var(--theme-bg-section-alt);
+    text-align: center;
+    padding: 100px 0;
+}
+
+.closing-inner {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.closing-title {
+    font-family: var(--font-en);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+}
+
+.closing-subtitle {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: var(--color-text);
+}
+
+.closing-text {
+    font-size: 18px;
+    line-height: 2.4;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+    .closing-title {
+        font-size: 32px;
+    }
+    .closing-text {
+        font-size: 16px;
+    }
 }
 
 /* ==========================================================================
