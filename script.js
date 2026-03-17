@@ -453,19 +453,19 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
-        // ⑩ クロージング — ブラーイン (gold section)
+        // ⑩ クロージング — ブラーイン (gold section) ※常に表示、スクロールで演出のみ
         gsap.fromTo('.closing-title',
-            { opacity: 0, y: 70, filter: 'blur(24px)' },
+            { y: 70, filter: 'blur(24px)' },
             {
-                scrollTrigger: { trigger: '.closing-message', start: 'top 72%' },
-                opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.4, ease: 'power4.out'
+                scrollTrigger: { trigger: '.closing-message', start: 'top 85%' },
+                y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power4.out'
             }
         );
         gsap.fromTo(['.closing-subtitle', '.closing-text'],
-            { opacity: 0, y: 35 },
+            { y: 35 },
             {
-                scrollTrigger: { trigger: '.closing-message', start: 'top 68%' },
-                opacity: 1, y: 0, duration: 0.9, stagger: 0.2, ease: 'power3.out'
+                scrollTrigger: { trigger: '.closing-message', start: 'top 82%' },
+                y: 0, duration: 0.9, stagger: 0.2, ease: 'power3.out'
             }
         );
 

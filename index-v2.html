@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社HRプロデュース</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles-v2.css">
+</head>
+<body class="is-loading" data-theme="white">
+    <!-- カスタムカーソル -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- ページ背景（GSAPで色を遷移） -->
+    <div id="page-bg" class="page-bg"></div>
+
+    <!-- V2: 固定ゴールドラジアルオーバーレイ -->
+    <div class="page-radial-overlay" aria-hidden="true"></div>
+
+    <!-- ローディング画面 -->
+    <div class="loading-screen">
+        <div class="loading-logo-wrap">
+            <div class="loading-logo">HR PRODUCE</div>
+            <span class="loading-tagline">Human Resource Produce Company</span>
+        </div>
+        <div class="loading-counter" aria-hidden="true">00</div>
+        <div class="loading-bar"></div>
+    </div>
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="/">HR PRODUCE</a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item has-mega-menu">
+                        <a href="#business">BUSINESS / SERVICE</a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-inner">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-col">
+                                        <h4>事業・サービス</h4>
+                                        <ul class="mega-menu-links">
+                                            <li><a href="#business">Career Produce（キャリアプロデュース）</a></li>
+                                            <li><a href="#business">Talent Produce（タレントプロデュース）</a></li>
+                                            <li><a href="#business">Story Produce（ストーリープロデュース）</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-col">
+                                        <h4>サービス一覧</h4>
+                                        <ul class="mega-menu-links">
+                                            <li><a href="#business">保育の教科書 求人版</a></li>
+                                            <li><a href="#business">リブスト転職</a></li>
+                                            <li><a href="#business">リブストHR</a></li>
+                                            <li><a href="#business">リブストWoman</a></li>
+                                            <li><a href="#business">リブストAIラボ</a></li>
+                                            <li><a href="#business">リブストコーチング</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="#company">COMPANY</a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-inner">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-col">
+                                        <h4>企業情報</h4>
+                                        <ul class="mega-menu-links">
+                                            <li><a href="#company">会社概要</a></li>
+                                            <li><a href="#company">トップメッセージ</a></li>
+                                            <li><a href="#company">企業理念</a></li>
+                                            <li><a href="#company">沿革</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="#recruit">RECRUIT</a></li>
+                    <li class="nav-item"><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+            <!-- メガメニュー用オーバーレイ -->
+            <div class="mega-menu-overlay"></div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- SP用メニュー -->
+        <div class="sp-menu">
+            <div class="sp-menu-inner">
+                <ul class="sp-nav-list">
+                    <li><a href="#business">BUSINESS / SERVICE</a></li>
+                    <li><a href="#company">COMPANY</a></li>
+                    <li><a href="#recruit">RECRUIT</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- ファーストビュー -->
+    <section class="first-view">
+        <div class="first-view-video">
+            <video autoplay muted loop playsinline>
+                <source src="image/first-view/Cinematic_Japanese_City_Silhouette_Loop.mp4" type="video/mp4">
+                <source src="image/first-view/Organic_HR_Brand_Animation_Generation.mp4" type="video/mp4">
+            </video>
+            <!-- 静止画スライドショー（動画の上に重ねてクロスフェード） -->
+            <div class="hero-slideshow" aria-hidden="true">
+                <div class="hero-slide is-active" style="background-image: url('image/first-view/Gemini_Generated_Image_163vsj163vsj163v.png')"></div>
+                <div class="hero-slide" style="background-image: url('image/first-view/Gemini_Generated_Image_zfnv9qzfnv9qzfnv.png')"></div>
+            </div>
+            <div class="first-view-overlay"></div>
+        </div>
+        <!-- パーティクルキャンバス -->
+        <canvas class="hero-canvas" id="hero-canvas"></canvas>
+        <!-- 浮遊する幾何学的シェイプ -->
+        <div class="hero-shapes">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+            <div class="hero-shape shape-3"></div>
+            <div class="hero-shape shape-4"></div>
+        </div>
+        <!-- V2: 巨大ゴーストHR文字 -->
+        <div class="hero-brand-bg" aria-hidden="true">HR</div>
+        <!-- V2: アニメーションゴールドヴェール -->
+        <div class="hero-gold-veil" aria-hidden="true"></div>
+        <!-- V2: スクロール連動縦ライン -->
+        <div class="hero-progress-line" aria-hidden="true"></div>
+        <div class="first-view-content">
+            <!-- V2: アイブロウ -->
+            <span class="hero-eyebrow">HRプロデュース</span>
+            <h1 class="main-catch">
+                <span class="main-catch-line js-split-text">日本の人材価値を</span>
+                <span class="main-catch-emphasis js-split-text">最大化する</span>
+            </h1>
+            <p class="sub-catch js-fade-up">私たちは、人の可能性と組織の未来にスポットライトを当てる<br class="pc-only">HRプロデュースカンパニーです。</p>
+        </div>
+        <div class="scroll-down">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <main>
+        <!-- メッセージ（物語コピー） -->
+        <section class="section message" data-section-theme="dark">
+            <div class="section-grad-orb" aria-hidden="true"></div>
+            <div class="container">
+                <div class="message-inner js-fade-up">
+                    <p class="message-text">
+                        ただ業務をこなし、決められた役割を演じる。<br>
+                        気づけば仕事は、心を置き去りにした「作業」になっていた。<br>
+                        <br>
+                        誰かに言われたからやる。決まっているからやる。<br>
+                        そこには、誇りや高鳴りもない。<br>
+                        <br>
+                        明日を待ち遠しく思えない働き方が、<br>
+                        日常の輝きを、少しずつ奪っていく。<br>
+                        <br>
+                        でも、私たちは信じている。<br>
+                        一編の映画が人生を変えるように。<br>
+                        一曲の音楽が心を震わせるように。<br>
+                        働く時間だって、人の心を動かす瞬間になれる。<br>
+                        <br>
+                        誰かの一言が、重い会社の空気を変えることがある。<br>
+                        一人の気づかいが、仕事を前に進めることがある。<br>
+                        子どもをあやす笑顔が、その日の現場を救うこともある。<br>
+                        <br>
+                        仕事とは、人を喜ばせることができる最高の表現だから。<br>
+                        <br>
+                        一人ひとりの「らしさ」という、まだ小さな才能の芽。<br>
+                        組織の奥底に眠る、世の中を変えるかもしれない可能性。<br>
+                        <br>
+                        それを見つけ、光の当たる場所へ導く。<br>
+                        それが、私たちの使命。<br>
+                        <br>
+                        <span class="message-highlight">やらされ仕事を、なくす。</span><br>
+                        <br>
+                        すべての働く人が、誰かの明日を照らす主役になるために。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 事業・サービス -->
+        <section id="business" class="section business" data-section-theme="light">
+            <div class="section-bg-text" data-text="BUSINESS">BUSINESS</div>
+            <div class="container">
+                <div class="section-header js-fade-up">
+                    <h2 class="section-title">BUSINESS / SERVICE</h2>
+                    <p class="section-subtitle">事業/サービス</p>
+                    <p class="section-desc">
+                        私たちは Career / Talent / Story の3つのプロデュース事業を展開しています。<br class="pc-only">
+                        人の可能性と組織の未来をつなぎ、<br class="pc-only">
+                        個人のキャリアと企業の成長を同時に実現します。
+                    </p>
+                </div>
+            </div>
+                
+            <!-- 自動スクロールエリア（Marquee） -->
+            <div class="marquee-section js-fade-up">
+                <!-- HR事業 -->
+                <div class="marquee-row">
+                    <div class="marquee-label">HR事業</div>
+                    <div class="marquee-container">
+                        <div class="marquee-content">
+                            <!-- アイテム1セット目 -->
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/保育の教科書_求人版.png" alt="保育の教科書"></div>
+                                <div class="card-text">
+                                    <h5>保育の教科書</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/保育の教科書_メディア.png" alt="自発管の教科書"></div>
+                                <div class="card-text">
+                                    <h5>自発管の教科書</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/リブスト転職.png" alt="ラシナビ転職 Essential"></div>
+                                <div class="card-text">
+                                    <h5>ラシナビ転職 Essential</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/リブストHR.png" alt="ラシナビ転職 HR"></div>
+                                <div class="card-text">
+                                    <h5>ラシナビ転職 HR</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/リブストwoman.png" alt="ラシナビ転職 M&A"></div>
+                                <div class="card-text">
+                                    <h5>ラシナビ転職 M&A</h5>
+                                </div>
+                            </div>
+                            
+                            <!-- 複製（ループ用） -->
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/保育の教科書_求人版.png" alt="保育の教科書"></div>
+                                <div class="card-text">
+                                    <h5>保育の教科書</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/保育の教科書_メディア.png" alt="自発管の教科書"></div>
+                                <div class="card-text">
+                                    <h5>自発管の教科書</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/リブスト転職.png" alt="ラシナビ転職 Essential"></div>
+                                <div class="card-text">
+                                    <h5>ラシナビ転職 Essential</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/リブストHR.png" alt="ラシナビ転職 HR"></div>
+                                <div class="card-text">
+                                    <h5>ラシナビ転職 HR</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/リブストwoman.png" alt="ラシナビ転職 M&A"></div>
+                                <div class="card-text">
+                                    <h5>ラシナビ転職 M&A</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 教育事業・その他 -->
+                <div class="marquee-row reverse">
+                    <div class="marquee-label">Talent事業</div>
+                    <div class="marquee-container">
+                        <div class="marquee-content">
+                            <!-- アイテム1セット目 -->
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/みらぼ.jpg" alt="みらぼ"></div>
+                                <div class="card-text">
+                                    <h5>みらぼ（非認知能力可視化）</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/Gemini_Generated_Image_fo9lc7fo9lc7fo9l.png" alt="組織コンサルティング"></div>
+                                <div class="card-text">
+                                    <h5>組織コンサルティング</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/Gemini_Generated_Image_fo9lc7fo9lc7fo9l.png" alt="採用コンサルティング"></div>
+                                <div class="card-text">
+                                    <h5>採用コンサルティング</h5>
+                                </div>
+                            </div>
+                            
+                            <!-- 複製（ループ用） -->
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/みらぼ.jpg" alt="みらぼ"></div>
+                                <div class="card-text">
+                                    <h5>みらぼ（非認知能力可視化）</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/Gemini_Generated_Image_fo9lc7fo9lc7fo9l.png" alt="組織コンサルティング"></div>
+                                <div class="card-text">
+                                    <h5>組織コンサルティング</h5>
+                                </div>
+                            </div>
+                            <div class="service-card">
+                                <div class="card-image"><img src="image/service/Gemini_Generated_Image_fo9lc7fo9lc7fo9l.png" alt="採用コンサルティング"></div>
+                                <div class="card-text">
+                                    <h5>採用コンサルティング</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="view-more-container">
+                     <a href="#" class="view-more-btn">VIEW MORE</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 企業情報 -->
+        <section id="company" class="section company" data-section-theme="dark">
+            <div class="section-grad-orb" aria-hidden="true"></div>
+            <div class="section-bg-text" data-text="COMPANY">COMPANY</div>
+            <div class="split-layout">
+                <!-- 左：セクション識別子（スティッキー） -->
+                <div class="split-layout-left">
+                    <div class="split-section-label js-fade-up">
+                        <span class="split-section-num">02</span>
+                        <span class="split-section-en">COMPANY</span>
+                        <span class="split-section-jp">企業情報</span>
+                    </div>
+                </div>
+                <!-- 右：コンテンツ -->
+                <div class="split-layout-right">
+                    <div class="mvv-section js-fade-up">
+                        <div class="mvv-grid">
+                            <div class="mvv-card">
+                                <h4>MISSION</h4>
+                                <p class="ja">人の人生と組織の未来を、<br>最高の物語にプロデュースする。</p>
+                            </div>
+                            <div class="mvv-card">
+                                <h4>VISION</h4>
+                                <p class="ja">「やらされ仕事」を、<br>この世からなくす。</p>
+                            </div>
+                            <div class="mvv-card">
+                                <h4>VALUE</h4>
+                                <p class="ja">「誠実」に、面白く。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section js-fade-up">
+                        <div class="info-header">
+                            <h3 class="content-head">会社概要</h3>
+                        </div>
+                        <dl class="info-list">
+                            <div class="info-row">
+                                <dt>社名</dt>
+                                <dd>株式会社HRプロデュース</dd>
+                            </div>
+                            <div class="info-row">
+                                <dt>所在地</dt>
+                                <dd>〒150-0001 東京都渋谷区神宮前6-23-2 第8SYビル2階</dd>
+                            </div>
+                            <div class="info-row">
+                                <dt>連絡先</dt>
+                                <dd>TEL: 03-6407-0027 / FAX: 03-6407-0028</dd>
+                            </div>
+                            <div class="info-row">
+                                <dt>事業内容</dt>
+                                <dd>
+                                    人材紹介事業（保育・福祉領域、HR・M&A領域）<br>
+                                    キャリア支援事業（教科書シリーズ、ラシナビシリーズ）<br>
+                                    非認知能力可視化・育成支援事業<br>
+                                    組織コンサルティング事業<br>
+                                    採用コンサルティング（RPO）事業<br>
+                                    ストーリープロデュース事業（準備中）
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="view-more-container">
+                        <a href="#" class="view-more-btn">VIEW MORE</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 採用情報 -->
+        <section id="recruit" class="section recruit" data-section-theme="gold">
+            <div class="section-grad-orb" aria-hidden="true"></div>
+            <div class="section-bg-text" data-text="RECRUIT">RECRUIT</div>
+            <div class="split-layout">
+                <!-- 左：セクション識別子（スティッキー） -->
+                <div class="split-layout-left">
+                    <div class="split-section-label js-fade-up">
+                        <span class="split-section-num">03</span>
+                        <span class="split-section-en">RECRUIT</span>
+                        <span class="split-section-jp">採用情報</span>
+                    </div>
+                </div>
+                <!-- 右：コンテンツ -->
+                <div class="split-layout-right">
+                    <div class="recruit-message js-fade-up">
+                        <p class="recruit-copy">「誰とやるか」は<br>私たちが一番大切にしていること</p>
+                        <p class="recruit-sub">
+                            これからのHRプロデュースを共に創っていける<br>
+                            熱い想いを持った仲間に出会えることを楽しみにしています。
+                        </p>
+                    </div>
+
+                    <div class="recruit-content-box js-fade-up">
+                        <div class="recruit-row">
+                            <div class="recruit-col">
+                                <h3 class="content-head">当社の強み</h3>
+                                <ul class="strength-points">
+                                    <li>保育士領域での圧倒的な採用実績とノウハウ</li>
+                                    <li>「見極め・クロージング力」のゼネラル展開</li>
+                                    <li>潜在的な優秀層へのアクセス力</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="view-more-container">
+                        <a href="#" class="view-more-btn">VIEW MORE</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- クロージングメッセージ -->
+        <section class="section closing-message" data-section-theme="gold">
+            <div class="container">
+                <div class="closing-inner">
+                    <h2 class="closing-title">Talent Agency</h2>
+                    <p class="closing-subtitle">人のプロデュース会社</p>
+                    <p class="closing-text">
+                        私たちは人材会社ではありません。<br>
+                        人の可能性を見つけ、<br>
+                        キャリアをデザインし、<br>
+                        組織を成長させる。<br>
+                        人と組織をプロデュースする会社です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- お問い合わせ -->
+        <section id="contact" class="section contact" data-section-theme="gold">
+            <div class="container">
+                <div class="contact-inner js-fade-up">
+                    <h2 class="section-title">CONTACT</h2>
+                    <p class="section-subtitle">お問い合わせ</p>
+                    <div class="contact-links">
+                        <a href="#" class="contact-btn">サービスについてのお問い合わせ</a>
+                        <a href="#" class="contact-btn white">採用についてのお問い合わせ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-left">
+                    <div class="footer-logo">株式会社HRプロデュース</div>
+                    <div class="social-links">
+                        <span>FOLLOW US</span>
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">x</a>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-col">
+                        <h4>事業・サービス</h4>
+                        <ul>
+                            <li><a href="#">Career Produce</a></li>
+                            <li><a href="#">Talent Produce</a></li>
+                            <li><a href="#">Story Produce</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>企業情報</h4>
+                        <ul>
+                            <li><a href="#">会社概要</a></li>
+                            <li><a href="#">トップメッセージ</a></li>
+                            <li><a href="#">企業理念</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>採用情報</h4>
+                        <ul>
+                            <li><a href="#">企業を知る</a></li>
+                            <li><a href="#">仕事を知る</a></li>
+                        </ul>
+                    </div>
+                     <div class="footer-col">
+                        <h4>お問い合わせ</h4>
+                        <ul>
+                            <li><a href="#">お問い合わせ一覧</a></li>
+                            <li><a href="#">プライバシーポリシー</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <small>&copy; HR Produce, Inc.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- テーマ切替（白メイン / 黄メイン） -->
+    <div class="theme-toggle" aria-label="テーマ切替">
+        <button type="button" class="theme-toggle-btn" data-theme="white" title="白メイン">白</button>
+        <button type="button" class="theme-toggle-btn" data-theme="yellow" title="黄メイン">黄</button>
+    </div>
+
+    <!-- パターン切替 -->
+    <div style="position:fixed;bottom:24px;left:24px;z-index:9000;display:flex;gap:6px;align-items:center;background:rgba(0,0,0,0.8);padding:8px 14px;border-radius:8px;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)">
+        <span style="font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-right:2px;font-family:sans-serif;text-transform:uppercase">Pattern</span>
+        <a href="index.html"              style="font-size:11px;font-weight:700;padding:5px 10px;border-radius:5px;color:rgba(255,255,255,0.5);text-decoration:none;font-family:sans-serif;transition:color 0.2s">01</a>
+        <a href="index-gold.html"         style="font-size:11px;font-weight:700;padding:5px 10px;border-radius:5px;color:rgba(255,255,255,0.5);text-decoration:none;font-family:sans-serif;transition:color 0.2s">02</a>
+        <a href="index-gold-pattern3.html" style="font-size:11px;font-weight:700;padding:5px 10px;border-radius:5px;color:rgba(255,255,255,0.5);text-decoration:none;font-family:sans-serif;transition:color 0.2s">03</a>
+        <a href="index-v2.html"           style="font-size:11px;font-weight:700;padding:5px 10px;border-radius:5px;background:#F7C02D;color:#1a1a1a;text-decoration:none;font-family:sans-serif">04</a>
+    </div>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script-v2.js"></script>
+</body>
+</html>

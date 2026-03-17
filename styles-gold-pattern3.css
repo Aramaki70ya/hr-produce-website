@@ -1,0 +1,435 @@
+/* ==========================================================================
+   GOLD PATTERN 3 — スクロールでガラッと変わる版
+   セクションごとに背景が黒→ダーク→ライト→ダーク→ゴールド→…と劇的に変化
+   styles.css の section themes を利用（styles-gold-override は読まない）
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Pattern Switcher — パターン2⇔3の切り替え
+   -------------------------------------------------------------------------- */
+.pattern-switcher {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 8px 12px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pattern-switcher a {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.pattern-switcher a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #F7C02D;
+}
+
+.pattern-switcher a.is-active {
+    background: #F7C02D;
+    color: #1a1a1a;
+}
+
+.pattern-switcher a:not(.is-active) {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   First View — 動画 + 静止画スライドショー
+   -------------------------------------------------------------------------- */
+
+/* 動画をモーションテクスチャとして薄めに */
+.first-view-video video {
+    opacity: 0.35;
+}
+
+/* 静止画スライドショー */
+.hero-slideshow {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s ease-in-out;
+}
+
+.hero-slide.is-active {
+    opacity: 1;
+    animation: kenBurns 12s ease-in-out forwards;
+}
+
+@keyframes kenBurns {
+    from { transform: scale(1); }
+    to   { transform: scale(1.07); }
+}
+
+/* Overlay をスライドショーの上に + パターン3カラー */
+.pattern3 .first-view-overlay {
+    z-index: 2;
+    background: linear-gradient(
+        165deg,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(20, 15, 5, 0.35) 50%,
+        transparent 100%
+    ),
+    linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(0, 0, 0, 0.88) 100%
+    ) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Loading — パターン3は黒背景でスタート
+   -------------------------------------------------------------------------- */
+body.pattern3 .loading-screen {
+    background-color: #0a0a0a !important;
+}
+
+body.pattern3 .loading-logo {
+    color: #F7C02D !important;
+}
+
+/* --------------------------------------------------------------------------
+   ダークセクション — 文字をより明るく（視認性向上）
+   -------------------------------------------------------------------------- */
+body.pattern3 [data-section-theme="dark"] .message-text {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .message-highlight {
+    color: #F7C02D !important;
+    -webkit-text-fill-color: #F7C02D !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .mvv-card .ja,
+body.pattern3 [data-section-theme="dark"] .info-row dd,
+body.pattern3 [data-section-theme="dark"] .strength-points li {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .recruit-sub {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .section-subtitle {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+body.pattern3 .split-section-jp {
+    color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* --------------------------------------------------------------------------
+   ファーストビュー — 黒背景で文字をくっきり
+   -------------------------------------------------------------------------- */
+body.pattern3 .first-view-content,
+body.pattern3 .first-view-content .main-catch-line,
+body.pattern3 .first-view-content .sub-catch {
+    color: #ffffff !important;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.pattern3 .scroll-down span {
+    color: #F7C02D !important;
+}
+
+/* --------------------------------------------------------------------------
+   コントラスト改善 — 各セクションで読みやすく
+   -------------------------------------------------------------------------- */
+
+/* ライトセクション（business）— 薄い背景なのでタイトル・本文は濃く */
+body.pattern3 [data-section-theme="light"] .section-title {
+    color: #1a1a1a !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+}
+
+body.pattern3 [data-section-theme="light"] .section-subtitle {
+    color: #333 !important;
+}
+
+body.pattern3 [data-section-theme="light"] .section-desc {
+    color: #1a1a1a !important;
+}
+
+/* ゴールドセクション（closing）— 濃い文字でコントラストアップ */
+body.pattern3 [data-section-theme="gold"] .closing-title,
+body.pattern3 [data-section-theme="gold"] .closing-subtitle,
+body.pattern3 [data-section-theme="gold"] .closing-text {
+    color: #0a0a0a !important;
+    -webkit-text-fill-color: #0a0a0a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .closing-subtitle {
+    color: rgba(10,10,10,0.75) !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .closing-text {
+    color: rgba(10,10,10,0.9) !important;
+}
+
+/* ダークセクション — 白文字の輝度を上げて視認性向上 */
+body.pattern3 [data-section-theme="dark"] .message-text {
+    color: rgba(255,255,255,0.92) !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .message-highlight {
+    color: #F7C02D !important;
+    -webkit-text-fill-color: #F7C02D !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .mvv-card .ja,
+body.pattern3 [data-section-theme="dark"] .info-row dd,
+body.pattern3 [data-section-theme="dark"] .strength-points li {
+    color: rgba(255,255,255,0.88) !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .recruit-sub {
+    color: rgba(255,255,255,0.78) !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .recruit-copy {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* split-layout のラベル（ダークセクション内） */
+body.pattern3 [data-section-theme="dark"] .split-section-en {
+    color: var(--color-primary) !important;
+}
+
+body.pattern3 [data-section-theme="dark"] .split-section-jp {
+    color: rgba(255,255,255,0.5) !important;
+}
+
+/* ファーストビュー — 黒背景で文字をくっきり */
+body.pattern3 .first-view-content,
+body.pattern3 .first-view-content .main-catch,
+body.pattern3 .first-view-content .main-catch-line,
+body.pattern3 .first-view-content .sub-catch {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+body.pattern3 .first-view-content .main-catch-emphasis {
+    color: #F7C02D !important;
+    -webkit-text-fill-color: #F7C02D !important;
+    text-shadow: 0 0 40px rgba(247, 192, 45, 0.3), 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.pattern3 .first-view-content .sub-catch {
+    color: rgba(255,255,255,0.9) !important;
+}
+
+/* --------------------------------------------------------------------------
+   ゴールドセクション（contact）— closing と同じく濃い文字・ボタン
+   -------------------------------------------------------------------------- */
+body.pattern3 [data-section-theme="gold"] .section-title,
+body.pattern3 [data-section-theme="gold"] .section-subtitle {
+    color: #0a0a0a !important;
+    -webkit-text-fill-color: #0a0a0a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .contact-btn {
+    background-color: #1a1a1a !important;
+    color: #F7C02D !important;
+    border-color: #1a1a1a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .contact-btn:hover {
+    background-color: #0a0a0a !important;
+    color: #F7C02D !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .contact-btn.white {
+    background-color: transparent !important;
+    color: #1a1a1a !important;
+    border-color: #1a1a1a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .contact-btn.white:hover {
+    background-color: #1a1a1a !important;
+    color: #F7C02D !important;
+}
+
+/* --------------------------------------------------------------------------
+   ゴールドセクション（message）— 物語テキストを濃く
+   -------------------------------------------------------------------------- */
+body.pattern3 [data-section-theme="gold"] .message-text {
+    color: #0a0a0a !important;
+    -webkit-text-fill-color: #0a0a0a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .message-highlight {
+    color: #0a0a0a !important;
+    -webkit-text-fill-color: #0a0a0a !important;
+    font-weight: 900;
+}
+
+/* --------------------------------------------------------------------------
+   ゴールドセクション（company）— MVV・会社概要を濃い文字で
+   -------------------------------------------------------------------------- */
+body.pattern3 [data-section-theme="gold"] .mvv-card {
+    background: rgba(0, 0, 0, 0.06) !important;
+    border-left-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .mvv-card h4 {
+    color: #0a0a0a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .mvv-card .ja {
+    color: rgba(10, 10, 10, 0.88) !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .content-head {
+    color: #0a0a0a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .info-row dt {
+    color: rgba(10, 10, 10, 0.7) !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .info-row dd {
+    color: #0a0a0a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .split-section-en {
+    color: #0a0a0a !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .split-section-jp {
+    color: rgba(10, 10, 10, 0.6) !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .split-section-num {
+    color: #F7C02D !important;
+    opacity: 0.2;
+}
+
+body.pattern3 [data-section-theme="gold"] .view-more-btn {
+    color: #0a0a0a !important;
+    border-color: rgba(10, 10, 10, 0.4) !important;
+}
+
+body.pattern3 [data-section-theme="gold"] .view-more-btn:hover {
+    background-color: #0a0a0a !important;
+    color: #F7C02D !important;
+}
+
+/* --------------------------------------------------------------------------
+   パターン2風 40% — ゴールドの温かみ・アクセントを追加
+   -------------------------------------------------------------------------- */
+
+/* ファーストビュー — オーバーレイにゴールドのほんのり暖かみ */
+body.pattern3 .first-view-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(247, 192, 45, 0.08) 30%,
+        rgba(0, 0, 0, 0.3) 100%
+    ) !important;
+}
+
+/* ライトセクション（事業）— パターン2のクリーム感・ゴールドアクセント */
+body.pattern3 [data-section-theme="light"] .section-title {
+    color: #1a1a1a !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+}
+
+body.pattern3 [data-section-theme="light"] .section-subtitle::after {
+    background-color: #F7C02D !important;
+    opacity: 0.6;
+}
+
+body.pattern3 [data-section-theme="light"] .view-more-btn {
+    color: #1a1a1a !important;
+    border-color: rgba(26, 26, 26, 0.3) !important;
+}
+
+body.pattern3 [data-section-theme="light"] .view-more-btn:hover {
+    background-color: #F7C02D !important;
+    color: #1a1a1a !important;
+    border-color: #F7C02D !important;
+}
+
+/* ダークセクション — recruit-grid / 募集職種カードの視認性向上 */
+body.pattern3 [data-section-theme="dark"] .recruit-card {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-card h4 {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-card .role-title {
+    color: #ffffff !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-card .role-desc {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-content-box .content-head {
+    color: #F7C02D !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-detail-list li {
+    border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-detail-list li dt {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-detail-list li dd {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+body.pattern3 [data-section-theme="dark"] .flow-step-num {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
+}
+body.pattern3 [data-section-theme="dark"] .flow-step-label {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+body.pattern3 [data-section-theme="dark"] .flow-arrow {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-row .strength-points li,
+body.pattern3 [data-section-theme="dark"] .recruit-row .content-head {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+body.pattern3 [data-section-theme="dark"] .recruit-row .content-head {
+    color: #F7C02D !important;
+}
+
+/* ダークセクション — ゴールドの差し色をやや強く */
+body.pattern3 [data-section-theme="dark"] .split-layout-left::before {
+    background: linear-gradient(to bottom, transparent, #F7C02D, transparent) !important;
+    opacity: 0.5;
+}
+
+body.pattern3 [data-section-theme="dark"] .split-section-num {
+    color: #F7C02D !important;
+    opacity: 0.25;
+}
+
+body.pattern3 [data-section-theme="dark"] .view-more-btn:hover {
+    background-color: #F7C02D !important;
+    color: #111 !important;
+}
+
+/* ローディング — パターン2風のゴールド */
+body.pattern3 .loading-bar {
+    background: linear-gradient(90deg, #F7C02D, #FAD14D) !important;
+}

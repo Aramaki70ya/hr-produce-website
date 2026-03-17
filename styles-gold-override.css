@@ -1,0 +1,704 @@
+/* ==========================================================================
+   GOLD VERSION OVERRIDE
+   ゴールド(#F7C02D)を全面に押し出したバージョン
+   このファイルは styles.css の後に読み込み、上書きする
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Variables — ゴールドを全面に
+   -------------------------------------------------------------------------- */
+:root {
+    --gold:        #F7C02D;
+    --gold-dark:   #E0A80A;
+    --gold-mid:    #D4A017;
+    --ink:         #1a1a1a;
+    --ink-sub:     rgba(26, 26, 26, 0.6);
+    --ink-faint:   rgba(26, 26, 26, 0.15);
+    --card-bg:     rgba(0, 0, 0, 0.07);
+    --card-bg-hover: rgba(0, 0, 0, 0.13);
+    --footer-bg:   #1a1a1a;
+}
+
+/* --------------------------------------------------------------------------
+   Body & Page Background
+   -------------------------------------------------------------------------- */
+body {
+    background-color: var(--gold);
+    color: var(--ink);
+}
+
+.page-bg {
+    background-color: var(--gold) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Loading Screen
+   -------------------------------------------------------------------------- */
+.loading-screen {
+    background-color: var(--gold) !important;
+}
+
+.loading-logo {
+    color: var(--ink) !important;
+}
+
+.loading-bar {
+    background-color: var(--ink) !important;
+}
+
+/* ローディング完了後はコンテンツを確実に表示（opacity:0で隠れたままになるのを防ぐ） */
+body.is-loaded .first-view-content,
+body.is-loaded .first-view-content .main-catch,
+body.is-loaded .first-view-content .main-catch-line,
+body.is-loaded .first-view-content .main-catch-emphasis,
+body.is-loaded .first-view-content .sub-catch,
+body.is-loaded .js-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.header {
+    background-color: transparent;
+}
+
+.header.is-scrolled {
+    background-color: var(--gold) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12) !important;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Logo & Nav — dark ink on gold */
+.logo a {
+    color: var(--ink) !important;
+}
+
+.header.is-scrolled .logo a {
+    color: var(--ink) !important;
+}
+
+.nav-list a {
+    color: var(--ink) !important;
+}
+
+.header.is-scrolled .nav-list a {
+    color: var(--ink) !important;
+}
+
+.nav-list a::after {
+    background-color: var(--ink) !important;
+}
+
+/* Hamburger */
+.hamburger span {
+    background-color: var(--ink) !important;
+}
+
+.header.is-scrolled .hamburger span {
+    background-color: var(--ink) !important;
+}
+
+/* SP Menu */
+.sp-menu {
+    background-color: var(--gold) !important;
+}
+
+.sp-nav-list a {
+    color: var(--ink) !important;
+}
+
+.header.is-open .hamburger span {
+    background-color: var(--ink) !important;
+}
+
+/* Mega Menu */
+.mega-menu {
+    background-color: var(--gold) !important;
+    border-top: 3px solid rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mega-menu-col h4 {
+    color: var(--ink) !important;
+    opacity: 0.5;
+}
+
+.mega-menu-links li a {
+    color: var(--ink) !important;
+    font-weight: 600;
+}
+
+.mega-menu-links li a:hover {
+    color: var(--ink) !important;
+    opacity: 0.6;
+}
+
+/* Header theme states — always ink on gold */
+.header.is-dark-bg .logo a,
+.header.is-light-bg .logo a,
+.header.is-gold-bg .logo a {
+    color: var(--ink) !important;
+}
+
+.header.is-dark-bg .nav-list a,
+.header.is-light-bg .nav-list a,
+.header.is-gold-bg .nav-list a {
+    color: var(--ink) !important;
+}
+
+.header.is-dark-bg .hamburger span,
+.header.is-light-bg .hamburger span,
+.header.is-gold-bg .hamburger span {
+    background-color: var(--ink) !important;
+}
+
+/* --------------------------------------------------------------------------
+   First View (Hero)
+   -------------------------------------------------------------------------- */
+.first-view {
+    background-color: var(--gold);
+}
+
+/* 動画 — モーションテクスチャとして薄めに */
+.first-view-video video {
+    opacity: 0.35;
+}
+
+/* 静止画スライドショー */
+.hero-slideshow {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s ease-in-out;
+}
+
+.hero-slide.is-active {
+    opacity: 1;
+    animation: kenBurns 12s ease-in-out forwards;
+}
+
+@keyframes kenBurns {
+    from { transform: scale(1); }
+    to   { transform: scale(1.07); }
+}
+
+/* Overlay を暗めに → スライドショーの上に */
+.first-view-overlay {
+    z-index: 2;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.25) 60%,
+        transparent 100%
+    ),
+    linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(0, 0, 0, 0.75) 100%
+    ) !important;
+}
+
+.first-view-content {
+    color: var(--ink) !important;
+}
+
+.first-view-content h1 {
+    color: var(--ink) !important;
+    -webkit-text-fill-color: var(--ink) !important;
+}
+
+.first-view-content .sub-catch {
+    color: rgba(26, 26, 26, 0.75) !important;
+}
+
+.scroll-down span {
+    color: var(--ink) !important;
+}
+
+.scroll-line {
+    background: linear-gradient(to bottom, var(--ink), transparent) !important;
+}
+
+/* Hero shapes — dark tint */
+.hero-shape {
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Sections — 全セクション共通: ゴールド背景 / 暗いテキスト
+   -------------------------------------------------------------------------- */
+
+/* Dark セクション → ゴールド上の暗いテキストに反転 */
+[data-section-theme="dark"] {
+    color: var(--ink) !important;
+}
+
+[data-section-theme="dark"] .section-title {
+    color: var(--ink) !important;
+    opacity: 0.9;
+}
+
+[data-section-theme="dark"] .section-subtitle {
+    color: var(--ink-sub) !important;
+}
+
+[data-section-theme="dark"] .section-subtitle::after {
+    background-color: var(--ink) !important;
+    opacity: 0.4;
+}
+
+[data-section-theme="dark"] .section-desc {
+    color: var(--ink-sub) !important;
+}
+
+[data-section-theme="dark"] .message-text {
+    color: var(--ink) !important;
+    opacity: 0.82;
+}
+
+.message-highlight {
+    color: var(--ink) !important;
+    font-weight: 900;
+}
+
+/* MVVカード */
+[data-section-theme="dark"] .mvv-card {
+    background: var(--card-bg) !important;
+    border-left: 3px solid rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-section-theme="dark"] .mvv-card:hover {
+    background: var(--card-bg-hover) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-section-theme="dark"] .mvv-card h4 {
+    color: var(--ink) !important;
+    font-weight: 900;
+}
+
+[data-section-theme="dark"] .mvv-card .ja {
+    color: var(--ink) !important;
+    opacity: 0.75;
+}
+
+/* 会社概要テーブル */
+[data-section-theme="dark"] .info-header {
+    border-bottom-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-section-theme="dark"] .content-head {
+    color: var(--ink) !important;
+}
+
+[data-section-theme="dark"] .info-row {
+    border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-section-theme="dark"] .info-row dt {
+    color: var(--ink) !important;
+    font-weight: 700;
+}
+
+[data-section-theme="dark"] .info-row dd {
+    color: var(--ink) !important;
+    opacity: 0.75;
+}
+
+/* 採用情報 */
+[data-section-theme="dark"] .strength-points li {
+    color: var(--ink) !important;
+    border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+    opacity: 0.8;
+}
+
+[data-section-theme="dark"] .strength-points li::before {
+    color: var(--ink) !important;
+}
+
+[data-section-theme="dark"] .strength-points li:hover {
+    color: var(--ink) !important;
+    opacity: 1;
+}
+
+[data-section-theme="dark"] .recruit-sub {
+    color: var(--ink-sub) !important;
+}
+
+[data-section-theme="dark"] .recruit-copy {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--ink) !important;
+    background-clip: unset !important;
+    color: var(--ink) !important;
+    font-weight: 900;
+}
+
+/* VIEW MORE ボタン */
+[data-section-theme="dark"] .view-more-btn {
+    color: var(--ink) !important;
+    border-color: rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-section-theme="dark"] .view-more-btn:hover {
+    background-color: var(--ink) !important;
+    color: var(--gold) !important;
+}
+
+/* Section bg ghost text */
+[data-section-theme="dark"] .section-bg-text {
+    color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* サイドバー数字ラベル */
+.split-section-num {
+    color: var(--ink) !important;
+    opacity: 0.12 !important;
+}
+
+.split-section-en {
+    color: var(--ink) !important;
+    opacity: 0.5;
+}
+
+.split-section-jp {
+    color: var(--ink-sub) !important;
+}
+
+.split-layout-left {
+    border-right-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.split-layout-left::before {
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3), transparent) !important;
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT Section (Business)
+   -------------------------------------------------------------------------- */
+[data-section-theme="light"] .section-title {
+    color: var(--ink) !important;
+    opacity: 0.9;
+}
+
+[data-section-theme="light"] .section-subtitle {
+    color: var(--ink-sub) !important;
+}
+
+[data-section-theme="light"] .section-subtitle::after {
+    background-color: var(--ink) !important;
+    opacity: 0.3;
+}
+
+[data-section-theme="light"] .section-desc {
+    color: var(--ink) !important;
+    opacity: 0.75;
+}
+
+[data-section-theme="light"] .card-text h5 {
+    color: var(--ink) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Service Cards (Marquee)
+   -------------------------------------------------------------------------- */
+.service-card {
+    background: rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.service-card:hover {
+    background: rgba(0, 0, 0, 0.12) !important;
+    border-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+.marquee-label {
+    color: var(--ink) !important;
+    opacity: 0.45;
+}
+
+/* --------------------------------------------------------------------------
+   Closing Message Section (GOLDセクション — 元から金なのでそのまま)
+   -------------------------------------------------------------------------- */
+[data-section-theme="gold"] .closing-title {
+    color: var(--ink) !important;
+    -webkit-text-fill-color: var(--ink) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Contact Section
+   -------------------------------------------------------------------------- */
+.contact .section-title {
+    color: var(--ink) !important;
+}
+
+.contact .section-subtitle {
+    color: var(--ink-sub) !important;
+}
+
+.contact .section-subtitle::after {
+    background-color: var(--ink) !important;
+    opacity: 0.3;
+}
+
+.contact-btn {
+    background-color: var(--ink) !important;
+    color: var(--gold) !important;
+    border-color: var(--ink) !important;
+}
+
+.contact-btn:hover {
+    background-color: transparent !important;
+    color: var(--ink) !important;
+    border-color: var(--ink) !important;
+}
+
+.contact-btn.white {
+    background-color: transparent !important;
+    color: var(--ink) !important;
+    border: 2px solid var(--ink) !important;
+}
+
+.contact-btn.white:hover {
+    background-color: var(--ink) !important;
+    color: var(--gold) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Theme Toggle — ゴールドバージョンでは非表示
+   -------------------------------------------------------------------------- */
+.theme-toggle {
+    display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.footer {
+    background-color: var(--footer-bg) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.footer-logo {
+    color: #ffffff !important;
+}
+
+.footer-col h4 {
+    color: var(--gold) !important;
+}
+
+.footer-col a {
+    color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.footer-col a:hover {
+    color: var(--gold) !important;
+}
+
+.social-links span {
+    color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.social-icon {
+    color: rgba(255, 255, 255, 0.55) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.social-icon:hover {
+    color: var(--gold) !important;
+    border-color: var(--gold) !important;
+}
+
+.footer-divider,
+.footer-inner {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.copyright {
+    border-top-color: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Cursor — 暗い色に
+   -------------------------------------------------------------------------- */
+.cursor {
+    background-color: var(--ink) !important;
+}
+
+.cursor-follower {
+    border-color: rgba(26, 26, 26, 0.4) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Message Section — 引用テキスト
+   -------------------------------------------------------------------------- */
+.message-text {
+    color: var(--ink) !important;
+}
+
+/* --------------------------------------------------------------------------
+   New content blocks (biz-block, recruit-card など) — dark theme context
+   -------------------------------------------------------------------------- */
+[data-section-theme="dark"] .biz-block,
+[data-section-theme="light"] .biz-block {
+    background: rgba(0,0,0,0.06) !important;
+    border-color: rgba(0,0,0,0.1) !important;
+    color: var(--ink) !important;
+}
+
+[data-section-theme="dark"] .biz-block:hover,
+[data-section-theme="light"] .biz-block:hover {
+    background: rgba(0,0,0,0.11) !important;
+}
+
+[data-section-theme="dark"] .biz-block-num,
+[data-section-theme="light"] .biz-block-num {
+    color: rgba(26,26,26,0.4) !important;
+}
+
+[data-section-theme="dark"] .biz-block-en,
+[data-section-theme="light"] .biz-block-en {
+    color: #1a1a1a !important;
+}
+
+[data-section-theme="dark"] .biz-block-jp,
+[data-section-theme="light"] .biz-block-jp {
+    color: rgba(26,26,26,0.5) !important;
+}
+
+[data-section-theme="dark"] .biz-block-desc,
+[data-section-theme="light"] .biz-block-desc {
+    color: rgba(26,26,26,0.72) !important;
+}
+
+[data-section-theme="dark"] .biz-divider,
+[data-section-theme="light"] .biz-divider {
+    background: rgba(0,0,0,0.25) !important;
+}
+
+[data-section-theme="dark"] .biz-services li,
+[data-section-theme="light"] .biz-services li {
+    color: #1a1a1a !important;
+    border-bottom-color: rgba(0,0,0,0.1) !important;
+}
+
+[data-section-theme="dark"] .biz-services li::before,
+[data-section-theme="light"] .biz-services li::before {
+    color: rgba(26,26,26,0.4) !important;
+}
+
+[data-section-theme="dark"] .biz-services li span,
+[data-section-theme="light"] .biz-services li span {
+    color: rgba(26,26,26,0.5) !important;
+}
+
+[data-section-theme="dark"] .biz-block-tag,
+[data-section-theme="light"] .biz-block-tag {
+    color: rgba(26,26,26,0.5) !important;
+    border-color: rgba(0,0,0,0.2) !important;
+}
+
+[data-section-theme="dark"] .series-name,
+[data-section-theme="light"] .series-name {
+    color: #1a1a1a !important;
+}
+
+/* Recruit cards */
+[data-section-theme="dark"] .recruit-card {
+    background: rgba(0,0,0,0.06) !important;
+    border-color: rgba(0,0,0,0.1) !important;
+}
+
+[data-section-theme="dark"] .recruit-card h4 {
+    color: rgba(26,26,26,0.45) !important;
+}
+
+[data-section-theme="dark"] .recruit-card .role-title {
+    color: #1a1a1a !important;
+}
+
+[data-section-theme="dark"] .recruit-card .role-desc {
+    color: rgba(26,26,26,0.65) !important;
+}
+
+[data-section-theme="dark"] .recruit-detail-list li {
+    border-bottom-color: rgba(0,0,0,0.1) !important;
+    color: #1a1a1a !important;
+}
+
+[data-section-theme="dark"] .recruit-detail-list li dt {
+    color: rgba(26,26,26,0.45) !important;
+}
+
+[data-section-theme="dark"] .recruit-detail-list li dd {
+    color: rgba(26,26,26,0.78) !important;
+}
+
+[data-section-theme="dark"] .flow-step-num {
+    border-color: rgba(26,26,26,0.35) !important;
+    color: #1a1a1a !important;
+}
+
+[data-section-theme="dark"] .flow-step-label {
+    color: rgba(26,26,26,0.65) !important;
+}
+
+[data-section-theme="dark"] .flow-arrow {
+    color: rgba(26,26,26,0.3) !important;
+}
+
+/* Closing */
+[data-section-theme="gold"] .closing-subtitle {
+    color: rgba(26,26,26,0.5) !important;
+}
+
+[data-section-theme="gold"] .closing-text {
+    color: rgba(26,26,26,0.75) !important;
+}
+
+/* --------------------------------------------------------------------------
+   General VIEW MORE button (outside section themes)
+   -------------------------------------------------------------------------- */
+.view-more-btn {
+    color: var(--ink) !important;
+    border-color: rgba(0, 0, 0, 0.35) !important;
+}
+
+.view-more-btn:hover {
+    background-color: var(--ink) !important;
+    color: var(--gold) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Section title & subtitle デフォルト (light bg context)
+   -------------------------------------------------------------------------- */
+.section-title {
+    color: var(--ink) !important;
+}
+
+.section-subtitle {
+    color: var(--ink-sub) !important;
+}
+
+.section-subtitle::after {
+    background-color: var(--ink) !important;
+    opacity: 0.3;
+}
+
+.section-desc {
+    color: var(--ink) !important;
+    opacity: 0.75;
+}
