@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="is-loading" data-theme="white">
+    <!-- カスタムカーソル -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- ページ背景（GSAPで色を遷移） -->
+    <div id="page-bg" class="page-bg"></div>
+
     <!-- ローディング画面 -->
     <div class="loading-screen">
         <div class="loading-logo">HR PRODUCE</div>
@@ -107,6 +114,15 @@
             </video>
             <div class="first-view-overlay"></div>
         </div>
+        <!-- パーティクルキャンバス -->
+        <canvas class="hero-canvas" id="hero-canvas"></canvas>
+        <!-- 浮遊する幾何学的シェイプ -->
+        <div class="hero-shapes">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+            <div class="hero-shape shape-3"></div>
+            <div class="hero-shape shape-4"></div>
+        </div>
         <div class="first-view-content">
             <h1 class="main-catch js-split-text">日本の人材価値を<br>最大化する</h1>
             <p class="sub-catch js-fade-up">私たちは、人の可能性と組織の未来にスポットライトを当てる<br class="pc-only">HRプロデュースカンパニーです。</p>
@@ -119,7 +135,7 @@
 
     <main>
         <!-- メッセージ（物語コピー） -->
-        <section class="section message">
+        <section class="section message" data-section-theme="dark">
             <div class="container">
                 <div class="message-inner js-fade-up">
                     <p class="message-text">
@@ -158,7 +174,7 @@
         </section>
 
         <!-- 事業・サービス -->
-        <section id="business" class="section business">
+        <section id="business" class="section business" data-section-theme="light">
             <div class="section-bg-text" data-text="BUSINESS">BUSINESS</div>
             <div class="container">
                 <div class="section-header js-fade-up">
@@ -303,15 +319,19 @@
         </section>
 
         <!-- 企業情報 -->
-        <section id="company" class="section company">
+        <section id="company" class="section company" data-section-theme="dark">
             <div class="section-bg-text" data-text="COMPANY">COMPANY</div>
-            <div class="container">
-                <div class="section-header js-fade-up">
-                    <h2 class="section-title">COMPANY</h2>
-                    <p class="section-subtitle">企業情報</p>
+            <div class="split-layout">
+                <!-- 左：セクション識別子（スティッキー） -->
+                <div class="split-layout-left">
+                    <div class="split-section-label js-fade-up">
+                        <span class="split-section-num">02</span>
+                        <span class="split-section-en">COMPANY</span>
+                        <span class="split-section-jp">企業情報</span>
+                    </div>
                 </div>
-                
-                <div class="company-content">
+                <!-- 右：コンテンツ -->
+                <div class="split-layout-right">
                     <div class="mvv-section js-fade-up">
                         <div class="mvv-grid">
                             <div class="mvv-card">
@@ -359,33 +379,37 @@
                             </div>
                         </dl>
                     </div>
-                </div>
-                
-                 <div class="view-more-container">
-                     <a href="#" class="view-more-btn">VIEW MORE</a>
+
+                    <div class="view-more-container">
+                        <a href="#" class="view-more-btn">VIEW MORE</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 採用情報 -->
-        <section id="recruit" class="section recruit">
+        <section id="recruit" class="section recruit" data-section-theme="dark">
             <div class="section-bg-text" data-text="RECRUIT">RECRUIT</div>
-            <div class="container">
-                <div class="recruit-inner js-fade-up">
-                    <div class="recruit-header-box">
-                         <h2 class="section-title">RECRUIT</h2>
-                         <p class="section-subtitle">採用情報</p>
+            <div class="split-layout">
+                <!-- 左：セクション識別子（スティッキー） -->
+                <div class="split-layout-left">
+                    <div class="split-section-label js-fade-up">
+                        <span class="split-section-num">03</span>
+                        <span class="split-section-en">RECRUIT</span>
+                        <span class="split-section-jp">採用情報</span>
                     </div>
-                    
-                    <div class="recruit-message">
-                         <p class="recruit-copy">「誰とやるか」は<br>私たちが一番大切にしていること</p>
-                         <p class="recruit-sub">
-                             これからのHRプロデュースを共に創っていける<br>
-                             熱い想いを持った仲間に出会えることを楽しみにしています。
-                         </p>
+                </div>
+                <!-- 右：コンテンツ -->
+                <div class="split-layout-right">
+                    <div class="recruit-message js-fade-up">
+                        <p class="recruit-copy">「誰とやるか」は<br>私たちが一番大切にしていること</p>
+                        <p class="recruit-sub">
+                            これからのHRプロデュースを共に創っていける<br>
+                            熱い想いを持った仲間に出会えることを楽しみにしています。
+                        </p>
                     </div>
-                    
-                    <div class="recruit-content-box">
+
+                    <div class="recruit-content-box js-fade-up">
                         <div class="recruit-row">
                             <div class="recruit-col">
                                 <h3 class="content-head">当社の強み</h3>
@@ -397,16 +421,16 @@
                             </div>
                         </div>
                     </div>
-                    
-                     <div class="view-more-container">
-                         <a href="#" class="view-more-btn">VIEW MORE</a>
+
+                    <div class="view-more-container">
+                        <a href="#" class="view-more-btn">VIEW MORE</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- クロージングメッセージ -->
-        <section class="section closing-message">
+        <section class="section closing-message" data-section-theme="gold">
             <div class="container">
                 <div class="closing-inner js-fade-up">
                     <h2 class="closing-title">Talent Agency</h2>
@@ -423,7 +447,7 @@
         </section>
 
         <!-- お問い合わせ -->
-        <section id="contact" class="section contact">
+        <section id="contact" class="section contact" data-section-theme="dark">
             <div class="container">
                 <div class="contact-inner js-fade-up">
                     <h2 class="section-title">CONTACT</h2>
