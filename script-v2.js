@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Map each section to its background color
     const sectionBgMap = [
         { selector: '.first-view',      bg: BG_COLORS.black  },
-        { selector: '.message',         bg: BG_COLORS.dark   },
+        { selector: '.message',         bg: BG_COLORS.gold   },
         { selector: '.business',        bg: BG_COLORS.light  },
-        { selector: '.company',         bg: BG_COLORS.darkalt },
+        { selector: '.company',         bg: BG_COLORS.gold   },
         { selector: '.recruit',         bg: BG_COLORS.gold   },
         { selector: '.closing-message', bg: BG_COLORS.gold   },
         { selector: '.contact',         bg: BG_COLORS.gold   },
-        { selector: '.footer',          bg: BG_COLORS.black  },
+        { selector: '.footer',          bg: BG_COLORS.gold   },
     ];
 
     function initPageBgTransitions() {
@@ -264,83 +264,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // --------------------------------------------------
     // Header Control
     // --------------------------------------------------
-    const megaMenuOverlay = document.querySelector('.mega-menu-overlay');
-    const navItems        = document.querySelectorAll('.nav-item.has-mega-menu');
-
     window.addEventListener('scroll', () => {
         header.classList.toggle('is-scrolled', window.scrollY > 50);
     });
 
     // --------------------------------------------------
-    // Mega Menu Control
+    // Nav smooth scroll
     // --------------------------------------------------
-    let currentMegaMenu = null;
-    let currentNavItem  = null;
-    let megaMenuTl      = null;
-    let closeTimer      = null;
-
-    header.addEventListener('mouseleave', () => { closeTimer = setTimeout(closeMegaMenu, 100); });
-    header.addEventListener('mouseenter', () => {
-        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-    });
-
-    navItems.forEach(navItem => {
-        const megaMenu      = navItem.querySelector('.mega-menu');
-        const megaMenuLinks = megaMenu.querySelectorAll('.mega-menu-links li');
-
-        navItem.addEventListener('mouseenter', () => {
-            if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-
-            if (currentMegaMenu && currentMegaMenu !== megaMenu) {
-                const prevLinks = currentMegaMenu.querySelectorAll('.mega-menu-links li');
-                gsap.to(prevLinks,       { opacity: 0, duration: 0.1 });
-                gsap.to(currentMegaMenu, { opacity: 0, visibility: 'hidden', duration: 0.1 });
-                if (currentNavItem) currentNavItem.classList.remove('is-active');
-            }
-
-            setTimeout(() => {
-                if (navItem.matches(':hover') || megaMenu.matches(':hover')) {
-                    openMegaMenu(navItem, megaMenu, megaMenuLinks);
-                }
-            }, 50);
+    document.querySelectorAll('.nav-list a[href^="#"]').forEach(link => {
+        link.addEventListener('click', e => {
+            const target = document.querySelector(link.getAttribute('href'));
+            if (!target) return;
+            e.preventDefault();
+            const offset = header.offsetHeight;
+            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
         });
     });
-
-    if (megaMenuOverlay) megaMenuOverlay.addEventListener('click', closeMegaMenu);
-
-    function openMegaMenu(navItem, megaMenu, megaMenuLinks) {
-        currentMegaMenu = megaMenu;
-        currentNavItem  = navItem;
-        navItem.classList.add('is-active');
-        header.classList.add('has-mega-menu-open');
-        if (megaMenuTl) megaMenuTl.kill();
-        if (megaMenuOverlay) gsap.to(megaMenuOverlay, { opacity: 1, visibility: 'visible', duration: 0.4, ease: 'power2.out' });
-        megaMenuTl = gsap.timeline()
-            .set(megaMenu,      { y: -20, opacity: 0, visibility: 'hidden' })
-            .set(megaMenuLinks, { opacity: 0, y: 10 })
-            .to(megaMenu,       { opacity: 1, visibility: 'visible', y: 0, duration: 0.4, ease: 'power3.out' })
-            .to(megaMenuLinks,  { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, '-=0.2');
-    }
-
-    function closeMegaMenu() {
-        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-        if (!currentMegaMenu) return;
-        const megaMenuLinks  = currentMegaMenu.querySelectorAll('.mega-menu-links li');
-        const menuToClose    = currentMegaMenu;
-        const navItemToClose = currentNavItem;
-        if (megaMenuTl) megaMenuTl.kill();
-        if (megaMenuOverlay) gsap.to(megaMenuOverlay, { opacity: 0, visibility: 'hidden', duration: 0.3, ease: 'power2.in' });
-        gsap.to(megaMenuLinks, { opacity: 0, y: 10, duration: 0.2, stagger: 0.02, ease: 'power2.in' });
-        gsap.to(menuToClose, {
-            opacity: 0, visibility: 'hidden', y: -15, duration: 0.3, ease: 'power2.in',
-            onComplete: () => {
-                if (navItemToClose) navItemToClose.classList.remove('is-active');
-                header.classList.remove('has-mega-menu-open');
-                gsap.set(menuToClose.querySelectorAll('.mega-menu-links li'), { opacity: 0, y: 10 });
-                currentMegaMenu = null; currentNavItem = null; megaMenuTl = null;
-            }
-        });
-    }
 
     const hamburger   = document.querySelector('.hamburger');
     const spMenuLinks = document.querySelectorAll('.sp-nav-list a');
@@ -386,35 +325,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startMainAnimations() {
 
+        // V2: hero-eyebrow アニメーション（最初に表示）
+        gsap.fromTo('.hero-eyebrow',
+            { opacity: 0, x: -20 },
+            { opacity: 0.9, x: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 }
+        );
+
         // ① ファーストビュー — V2: 回転付き立体スライドイン
         const charInners = document.querySelectorAll('.main-catch .char-inner');
         if (charInners.length > 0) {
-            // emphasis（2行目）: より大きく・回転付き
-            const emphasisChars = document.querySelectorAll('.main-catch-emphasis .char-inner');
             const lineChars     = document.querySelectorAll('.main-catch-line .char-inner');
-            if (emphasisChars.length) {
-                gsap.fromTo(emphasisChars,
-                    { yPercent: 115, rotation: 5, opacity: 0 },
-                    { yPercent: 0, rotation: 0, opacity: 1,
-                      duration: 1.1, stagger: 0.048, ease: 'power4.out', delay: 0.4 }
-                );
-            }
+            const emphasisChars = document.querySelectorAll('.main-catch-emphasis .char-inner');
             if (lineChars.length) {
                 gsap.fromTo(lineChars,
                     { yPercent: 80, opacity: 0 },
                     { yPercent: 0, opacity: 1,
-                      duration: 0.8, stagger: 0.035, ease: 'power3.out', delay: 1.1 }
+                      duration: 0.8, stagger: 0.035, ease: 'power3.out', delay: 0.3 }
+                );
+            }
+            if (emphasisChars.length) {
+                gsap.fromTo(emphasisChars,
+                    { yPercent: 115, rotation: 5, opacity: 0 },
+                    { yPercent: 0, rotation: 0, opacity: 1,
+                      duration: 1.1, stagger: 0.048, ease: 'power4.out', delay: 0.7 }
                 );
             }
         } else {
             gsap.fromTo('.main-catch', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
         }
-
-        // V2: hero-eyebrow アニメーション
-        gsap.fromTo('.hero-eyebrow',
-            { opacity: 0, x: -20 },
-            { opacity: 0.9, x: 0, duration: 0.8, ease: 'power3.out', delay: 1.8 }
-        );
 
         gsap.fromTo('.sub-catch',
             { opacity: 0, y: 20, filter: 'blur(12px)' },
@@ -457,12 +395,12 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
-        // ⑥ セクションタイトル — V2: clip-pathワイプ
+        // ⑥ セクションタイトル — V2: clip-pathワイプ（一度表示したら逆再生しない）
         document.querySelectorAll('.section-title').forEach(title => {
             gsap.fromTo(title,
                 { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
                 {
-                    scrollTrigger: { trigger: title, start: 'top 88%' },
+                    scrollTrigger: { trigger: title, start: 'top 88%', once: true },
                     clipPath: 'inset(0 0% 0 0)',
                     duration: 1.0, ease: 'power3.inOut'
                 }
@@ -576,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
         segments.forEach((seg, i) => {
             const trimmed = seg.trim();
             if (trimmed === '') {
-                if (i < segments.length - 1) newHtml += '<br>';
+                if (i < segments.length - 1) newHtml += '<br class="block-sep">';
             } else {
                 newHtml += `<span class="msg-line"><span class="msg-line-inner">${seg}</span></span>`;
                 if (i < segments.length - 1) newHtml += '<br>';
@@ -635,23 +573,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
-    // --------------------------------------------------
-    // テーマ切替（白メイン / 黄メイン）
-    // --------------------------------------------------
-    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const theme = btn.getAttribute('data-theme');
-            document.body.setAttribute('data-theme', theme);
-            document.querySelectorAll('.theme-toggle-btn').forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-        });
-    });
-
-    const currentTheme = document.body.getAttribute('data-theme') || 'white';
-    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-        if (btn.getAttribute('data-theme') === currentTheme) btn.classList.add('is-active');
-    });
 
 });
 
