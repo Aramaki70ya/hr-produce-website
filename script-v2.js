@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Color sequence: dark hero → dark message → LIGHT business → dark company
     //                 → dark recruit → GOLD closing → dark contact → black footer
     const pageBg = document.getElementById('page-bg');
+    const isBusinessPage = document.body.classList.contains('page-business');
 
     const BG_COLORS = {
         dark:    '#0d0d0d',
@@ -18,17 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
         black:   '#0a0a0a',
     };
 
-    // Map each section to its background color
-    const sectionBgMap = [
-        { selector: '.first-view',      bg: BG_COLORS.black  },
-        { selector: '.message',         bg: BG_COLORS.gold   },
-        { selector: '.business',        bg: BG_COLORS.light  },
-        { selector: '.company',         bg: BG_COLORS.gold   },
-        { selector: '.recruit',         bg: BG_COLORS.gold   },
-        { selector: '.closing-message', bg: BG_COLORS.gold   },
-        { selector: '.contact',         bg: BG_COLORS.gold   },
-        { selector: '.footer',          bg: BG_COLORS.gold   },
-    ];
+    // Map each section to its background color（事業詳細ページは専用マップ）
+    const sectionBgMap = isBusinessPage
+        ? [
+            { selector: '.page-business-hero',   bg: BG_COLORS.light },
+            { selector: '.page-business-intro',  bg: BG_COLORS.light },
+            { selector: '.page-business-detail', bg: BG_COLORS.light },
+            { selector: '.page-business-back',   bg: BG_COLORS.gold },
+            { selector: '.footer',               bg: BG_COLORS.gold },
+        ]
+        : [
+            { selector: '.first-view',      bg: BG_COLORS.black  },
+            { selector: '.message',         bg: BG_COLORS.gold   },
+            { selector: '.business',        bg: BG_COLORS.light  },
+            { selector: '.company',         bg: BG_COLORS.gold   },
+            { selector: '.recruit',         bg: BG_COLORS.gold   },
+            { selector: '.closing-message', bg: BG_COLORS.gold   },
+            { selector: '.contact',         bg: BG_COLORS.gold   },
+            { selector: '.footer',          bg: BG_COLORS.gold   },
+        ];
 
     function initPageBgTransitions() {
         if (!pageBg) return;
@@ -48,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let currentBg = BG_COLORS.black;
+    if (isBusinessPage && pageBg) {
+        gsap.set(pageBg, { backgroundColor: BG_COLORS.light });
+        currentBg = BG_COLORS.light;
+    }
 
     function transitionBg(newBg, sectionEl) {
         if (newBg === currentBg) return;
@@ -78,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    if (isBusinessPage) {
+        updateHeaderTheme('light');
+    }
 
     // --------------------------------------------------
     // Custom Cursor
@@ -244,27 +260,34 @@ document.addEventListener('DOMContentLoaded', () => {
     initSplitText();
 
     // --------------------------------------------------
-    // Loading Animation
+    // Loading Animation（business.html 等ローディング無しページはスキップ）
     // --------------------------------------------------
-    const loadingTl = gsap.timeline({
-        onComplete: () => {
-            document.body.classList.add('is-loaded');
-            document.body.classList.remove('is-loading');
-            initPageBgTransitions();
-            startMainAnimations();
-        }
-    });
+    function onInitialLoadComplete() {
+        document.body.classList.add('is-loaded');
+        document.body.classList.remove('is-loading');
+        initPageBgTransitions();
+        startMainAnimations();
+    }
 
-    loadingTl
-        .to('.loading-logo', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
-        .to('.loading-bar',  { width: '100%', duration: 0.8, ease: 'power2.inOut' }, '-=0.4')
-        .to('.loading-screen', { opacity: 0, duration: 0.8, ease: 'power2.inOut', delay: 0.4 });
+    const loadingScreen = document.querySelector('.loading-screen');
+    if (!loadingScreen) {
+        onInitialLoadComplete();
+    } else {
+        const loadingTl = gsap.timeline({
+            onComplete: () => onInitialLoadComplete()
+        });
 
+        loadingTl
+            .to('.loading-logo', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+            .to('.loading-bar',  { width: '100%', duration: 0.8, ease: 'power2.inOut' }, '-=0.4')
+            .to('.loading-screen', { opacity: 0, duration: 0.8, ease: 'power2.inOut', delay: 0.4 });
+    }
 
     // --------------------------------------------------
     // Header Control
     // --------------------------------------------------
     window.addEventListener('scroll', () => {
+        if (!header) return;
         header.classList.toggle('is-scrolled', window.scrollY > 50);
     });
 
@@ -283,10 +306,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const hamburger   = document.querySelector('.hamburger');
     const spMenuLinks = document.querySelectorAll('.sp-nav-list a');
-    hamburger.addEventListener('click', () => {
-        header.classList.toggle('is-open');
-        document.body.classList.toggle('is-locked');
-    });
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            header.classList.toggle('is-open');
+            document.body.classList.toggle('is-locked');
+        });
+    }
     spMenuLinks.forEach(link => {
         link.addEventListener('click', () => {
             header.classList.remove('is-open');
@@ -325,47 +350,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startMainAnimations() {
 
-        // V2: hero-eyebrow アニメーション（最初に表示）
-        gsap.fromTo('.hero-eyebrow',
-            { opacity: 0, x: -20 },
-            { opacity: 0.9, x: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 }
-        );
+        const hasFirstView = !!document.querySelector('.first-view');
 
-        // ① ファーストビュー — V2: 回転付き立体スライドイン
-        const charInners = document.querySelectorAll('.main-catch .char-inner');
-        if (charInners.length > 0) {
-            const lineChars     = document.querySelectorAll('.main-catch-line .char-inner');
-            const emphasisChars = document.querySelectorAll('.main-catch-emphasis .char-inner');
-            if (lineChars.length) {
-                gsap.fromTo(lineChars,
-                    { yPercent: 80, opacity: 0 },
-                    { yPercent: 0, opacity: 1,
-                      duration: 0.8, stagger: 0.035, ease: 'power3.out', delay: 0.3 }
-                );
+        if (hasFirstView) {
+            // V2: hero-eyebrow アニメーション（最初に表示）
+            gsap.fromTo('.hero-eyebrow',
+                { opacity: 0, x: -20 },
+                { opacity: 0.9, x: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 }
+            );
+
+            // ① ファーストビュー — V2: 回転付き立体スライドイン
+            const charInners = document.querySelectorAll('.main-catch .char-inner');
+            if (charInners.length > 0) {
+                const lineChars     = document.querySelectorAll('.main-catch-line .char-inner');
+                const emphasisChars = document.querySelectorAll('.main-catch-emphasis .char-inner');
+                if (lineChars.length) {
+                    gsap.fromTo(lineChars,
+                        { yPercent: 80, opacity: 0 },
+                        { yPercent: 0, opacity: 1,
+                          duration: 0.8, stagger: 0.035, ease: 'power3.out', delay: 0.3 }
+                    );
+                }
+                if (emphasisChars.length) {
+                    gsap.fromTo(emphasisChars,
+                        { yPercent: 115, rotation: 5, opacity: 0 },
+                        { yPercent: 0, rotation: 0, opacity: 1,
+                          duration: 1.1, stagger: 0.048, ease: 'power4.out', delay: 0.7 }
+                    );
+                }
+            } else {
+                gsap.fromTo('.main-catch', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
             }
-            if (emphasisChars.length) {
-                gsap.fromTo(emphasisChars,
-                    { yPercent: 115, rotation: 5, opacity: 0 },
-                    { yPercent: 0, rotation: 0, opacity: 1,
-                      duration: 1.1, stagger: 0.048, ease: 'power4.out', delay: 0.7 }
-                );
-            }
-        } else {
-            gsap.fromTo('.main-catch', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+
+            gsap.fromTo('.sub-catch',
+                { opacity: 0, y: 20, filter: 'blur(12px)' },
+                { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out', delay: 0.9 }
+            );
+
+            // ② 静止画スライドショー
+            initHeroSlideshow();
+
+            // ③ ヒーローシェイプ
+            gsap.to('.hero-shape', {
+                opacity: 1, duration: 2.5, stagger: 0.3, ease: 'power2.out', delay: 0.6
+            });
         }
-
-        gsap.fromTo('.sub-catch',
-            { opacity: 0, y: 20, filter: 'blur(12px)' },
-            { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out', delay: 0.9 }
-        );
-
-        // ② 静止画スライドショー
-        initHeroSlideshow();
-
-        // ③ ヒーローシェイプ
-        gsap.to('.hero-shape', {
-            opacity: 1, duration: 2.5, stagger: 0.3, ease: 'power2.out', delay: 0.6
-        });
 
         // ③ 共通フェードアップ
         document.querySelectorAll('.js-fade-up').forEach(el => {
@@ -441,20 +470,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // ⑩ クロージング — ブラーイン (gold section) ※常に表示、スクロールで演出のみ
-        gsap.fromTo('.closing-title',
-            { y: 70, filter: 'blur(24px)' },
-            {
-                scrollTrigger: { trigger: '.closing-message', start: 'top 85%' },
-                y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power4.out'
-            }
-        );
-        gsap.fromTo(['.closing-subtitle', '.closing-text'],
-            { y: 35 },
-            {
-                scrollTrigger: { trigger: '.closing-message', start: 'top 82%' },
-                y: 0, duration: 0.9, stagger: 0.2, ease: 'power3.out'
-            }
-        );
+        if (document.querySelector('.closing-message')) {
+            gsap.fromTo('.closing-title',
+                { y: 70, filter: 'blur(24px)' },
+                {
+                    scrollTrigger: { trigger: '.closing-message', start: 'top 85%' },
+                    y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power4.out'
+                }
+            );
+            gsap.fromTo(['.closing-subtitle', '.closing-text'],
+                { y: 35 },
+                {
+                    scrollTrigger: { trigger: '.closing-message', start: 'top 82%' },
+                    y: 0, duration: 0.9, stagger: 0.2, ease: 'power3.out'
+                }
+            );
+        }
 
         // ⑪ コンタクトボタン — clip-path ワイプ
         document.querySelectorAll('.contact-btn').forEach((btn, i) => {
@@ -674,7 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // V2: ページラジアルオーバーレイをゴールドセクションで強調
         const overlay = document.querySelector('.page-radial-overlay');
-        if (overlay) {
+        if (overlay && document.querySelector('.closing-message')) {
             ScrollTrigger.create({
                 trigger: '.closing-message',
                 start: 'top 55%',
