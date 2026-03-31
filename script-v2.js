@@ -407,6 +407,26 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         });
 
+        // ③' サービスの流れ — ヘッダーとカードの個別アニメーション
+        const flowSection = document.querySelector('.service-flow-section');
+        if (flowSection) {
+            gsap.fromTo(flowSection.querySelector('.service-flow-header'),
+                { opacity: 0, y: 30 },
+                {
+                    scrollTrigger: { trigger: flowSection, start: 'top 82%' },
+                    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out'
+                }
+            );
+            gsap.fromTo(flowSection.querySelectorAll('.service-flow-card'),
+                { opacity: 0, y: 40 },
+                {
+                    scrollTrigger: { trigger: flowSection, start: 'top 75%' },
+                    opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+                    stagger: 0.1
+                }
+            );
+        }
+
         // ④ メッセージ行リビール
         initMessageReveal();
 

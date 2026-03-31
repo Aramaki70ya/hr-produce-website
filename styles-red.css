@@ -1,0 +1,440 @@
+/* ==========================================================================
+   赤ベース版テーマ（白×赤を反転）
+   styles.css の後に読み込むオーバーライド
+   ========================================================================== */
+
+:root {
+    --color-primary: #FFFFFF;
+    --color-red-dark: #C4000F;
+    --color-red-light: #FF4D5E;
+    --color-text: #FFFFFF;
+    --color-text-sub: rgba(255, 255, 255, 0.85);
+    --color-bg: #E60012;
+    --color-bg-gray: #C4000F;
+    --color-border: rgba(255, 255, 255, 0.25);
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    /* 白いカード上では赤のまま使う用 */
+    --color-brand-red: #E60012;
+}
+
+/* Base */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+/* Loading */
+.loading-screen {
+    background-color: var(--color-bg);
+}
+
+.loading-logo {
+    color: var(--color-white);
+}
+
+.loading-bar {
+    background-color: var(--color-white);
+}
+
+/* Header */
+.header {
+    background-color: rgba(230, 0, 18, 0.98);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    border-bottom-color: var(--color-white);
+}
+
+.logo a,
+.nav-list a {
+    color: var(--color-white);
+}
+
+.nav-list a::after {
+    background-color: var(--color-white);
+}
+
+/* Mega Menu */
+.mega-menu {
+    background-color: var(--color-bg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border-top-color: var(--color-white);
+}
+
+.mega-menu-col h4 {
+    color: var(--color-white);
+}
+
+.mega-menu-links li a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mega-menu-links li a:hover {
+    color: var(--color-white);
+}
+
+/* Hamburger / SP */
+.hamburger span {
+    background-color: var(--color-white);
+}
+
+.header.is-open .hamburger span {
+    background-color: var(--color-white);
+}
+
+.sp-menu {
+    background-color: var(--color-bg);
+}
+
+.sp-nav-list a {
+    color: var(--color-white);
+}
+
+.sp-nav-list a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* First View（キャッチは白のまま） */
+.first-view-overlay {
+    background: linear-gradient(135deg, rgba(230, 0, 18, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.scroll-down span {
+    color: var(--color-white);
+}
+
+.scroll-line {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.scroll-line::after {
+    background-color: var(--color-white);
+}
+
+/* Section共通 */
+.section-title {
+    color: var(--color-white);
+}
+
+.section-subtitle {
+    color: var(--color-text-sub);
+}
+
+.section-subtitle::after {
+    background-color: var(--color-white);
+}
+
+.section-desc {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Business */
+.business {
+    background-color: var(--color-bg);
+}
+
+.business::before,
+.business::after {
+    background: var(--color-bg);
+}
+
+.marquee-label {
+    color: var(--color-white);
+}
+
+/* カードは白のまま（赤の海に浮かぶ） */
+.service-card:hover .card-image {
+    border-color: var(--color-white);
+}
+
+.service-card:hover .card-text h5 {
+    color: var(--color-brand-red);
+}
+
+.card-text h5 {
+    color: var(--color-black);
+}
+
+.card-image::after {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+}
+
+/* View More ボタン */
+.view-more-btn {
+    border-color: var(--color-white);
+    color: var(--color-white);
+}
+
+.view-more-btn:hover {
+    background-color: var(--color-white);
+    color: var(--color-brand-red);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Service flow */
+.service-flow-title {
+    color: var(--color-white);
+}
+
+.service-flow-lead {
+    color: var(--color-text-sub);
+}
+
+.service-flow-item {
+    border-top-color: var(--color-brand-red);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-flow-num {
+    color: rgba(230, 0, 18, 0.15);
+}
+
+.service-flow-body strong {
+    color: var(--color-brand-red);
+}
+
+.service-flow-body p {
+    color: var(--color-black);
+    opacity: 0.72;
+}
+
+/* Highlight */
+.highlight-section {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, var(--color-bg-gray) 100%);
+    border-top-color: var(--color-white);
+    border-bottom-color: var(--color-white);
+}
+
+.highlight-title {
+    color: var(--color-white);
+}
+
+.highlight-desc {
+    color: var(--color-text-sub);
+}
+
+.point-list li {
+    background: var(--color-white);
+    border-top-color: var(--color-brand-red);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.point-num {
+    color: rgba(230, 0, 18, 0.15);
+}
+
+.point-text strong {
+    color: var(--color-brand-red);
+}
+
+.point-text p {
+    color: #333333;
+}
+
+/* Company */
+.company {
+    background: linear-gradient(135deg, var(--color-bg-gray) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.company::before,
+.company::after {
+    background: linear-gradient(135deg, var(--color-bg-gray) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.company::before {
+    background: linear-gradient(90deg, var(--color-white) 0%, transparent 100%);
+}
+
+.mvv-card {
+    background: var(--color-white);
+    border-left-color: var(--color-brand-red);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mvv-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mvv-card h4 {
+    color: var(--color-brand-red);
+}
+
+.mvv-card .ja {
+    color: #333333;
+}
+
+.info-header {
+    border-bottom-color: var(--color-white);
+}
+
+.content-head {
+    color: var(--color-white);
+}
+
+.info-row {
+    border-bottom-color: var(--color-border);
+}
+
+.info-row dt,
+.info-row dd {
+    color: var(--color-text);
+}
+
+/* Recruit */
+.recruit {
+    background-color: var(--color-bg);
+}
+
+.recruit::before,
+.recruit::after {
+    background: var(--color-bg);
+}
+
+.recruit::before {
+    background: linear-gradient(90deg, transparent 0%, var(--color-white) 100%);
+}
+
+.recruit-copy {
+    color: var(--color-white);
+}
+
+.recruit-sub {
+    color: var(--color-text-sub);
+}
+
+.recruit-col .content-head {
+    border-bottom-color: var(--color-white);
+    color: var(--color-white);
+}
+
+.price-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--color-white);
+    color: var(--color-text);
+}
+
+.price-item .value {
+    color: var(--color-white);
+}
+
+.refund-box .label {
+    color: var(--color-white);
+}
+
+.refund-box li {
+    border-bottom-color: var(--color-border);
+    color: var(--color-text-sub);
+}
+
+.refund-box li:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.refund-box li span:last-child {
+    color: var(--color-white);
+}
+
+.strength-points li {
+    border-bottom-color: var(--color-border);
+    color: var(--color-text-sub);
+}
+
+.strength-points li::before {
+    color: var(--color-white);
+}
+
+.strength-points li:hover {
+    color: var(--color-white);
+}
+
+/* Contact */
+.contact {
+    background: linear-gradient(135deg, var(--color-bg-gray) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.contact::before,
+.contact::after {
+    background: linear-gradient(135deg, var(--color-bg-gray) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.contact::before {
+    background: var(--color-white);
+}
+
+.contact-btn {
+    background-color: var(--color-white);
+    color: var(--color-brand-red);
+}
+
+.contact-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--color-brand-red);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.contact-btn.white {
+    background-color: transparent;
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
+}
+
+.contact-btn.white:hover {
+    background-color: var(--color-white);
+    color: var(--color-brand-red);
+}
+
+/* Footer */
+.footer {
+    background-color: #0D0001;
+    border-top-color: var(--color-white);
+}
+
+.footer-logo {
+    color: var(--color-white);
+}
+
+.footer-col h4 {
+    color: var(--color-white);
+}
+
+.footer-col ul li a {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-col ul li a:hover {
+    color: var(--color-white);
+}
+
+.social-icon {
+    background: var(--color-white);
+    color: var(--color-brand-red);
+}
+
+.social-icon:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--color-brand-red);
+}
+
+.copyright {
+    border-top-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.copyright small {
+    color: var(--color-white);
+}
+
+/* Background Text */
+.section-bg-text {
+    color: rgba(255, 255, 255, 0.04);
+}
+
+/* デザイン切り替えボタン（赤ベース用） */
+.theme-switcher {
+    background-color: var(--color-white);
+    color: var(--color-brand-red);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.theme-switcher:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}

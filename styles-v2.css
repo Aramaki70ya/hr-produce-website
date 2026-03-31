@@ -3830,3 +3830,217 @@ body::before {
         padding: 24px 20px;
     }
 }
+
+/* ══════════════════════════════
+   Service Flow — HOW IT WORKS
+══════════════════════════════ */
+.service-flow-section {
+    padding: 64px clamp(20px, 5vw, 80px) 60px;
+    background: #111;
+}
+
+.service-flow-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.service-flow-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    letter-spacing: .25em;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+}
+
+.service-flow-title {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 12px;
+    letter-spacing: .05em;
+}
+
+.service-flow-lead {
+    font-size: 13px;
+    color: rgba(255,255,255,.45);
+    margin: 0;
+    line-height: 1.7;
+}
+
+.service-flow-steps {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    max-width: 1200px;
+}
+
+.service-flow-item {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+}
+
+.service-flow-card {
+    position: relative;
+    flex: 1;
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,.07);
+    border-left: none;
+    padding: 32px 20px 28px;
+    overflow: hidden;
+    transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
+    cursor: default;
+}
+
+.service-flow-item:first-child .service-flow-card {
+    border-left: 1px solid rgba(255,255,255,.07);
+}
+
+.service-flow-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+
+.service-flow-card:hover {
+    background: #222;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,.5);
+}
+
+.service-flow-card:hover::after {
+    transform: scaleX(1);
+}
+
+.service-flow-bg-num {
+    position: absolute;
+    bottom: -8px;
+    right: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(255,255,255,.04);
+    pointer-events: none;
+    user-select: none;
+    transition: color .3s ease;
+}
+
+.service-flow-card:hover .service-flow-bg-num {
+    color: rgba(247,192,45,.1);
+}
+
+.service-flow-step-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: .18em;
+    color: var(--color-primary);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+}
+
+.service-flow-step-label span {
+    font-weight: 700;
+}
+
+.service-flow-card-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    letter-spacing: .03em;
+}
+
+.service-flow-card-desc {
+    font-size: 11.5px;
+    line-height: 1.75;
+    color: rgba(255,255,255,.4);
+    margin: 0;
+}
+
+.service-flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 0;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+}
+
+.service-flow-arrow::after {
+    content: '';
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-top: 1.5px solid rgba(247,192,45,.7);
+    border-right: 1.5px solid rgba(247,192,45,.7);
+    transform: rotate(45deg) translateX(-3px);
+    flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+    .service-flow-steps {
+        flex-wrap: wrap;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    .service-flow-item {
+        flex: 1 1 calc(33.33% - 1px);
+        min-width: 160px;
+    }
+    .service-flow-arrow {
+        display: none;
+    }
+    .service-flow-card {
+        border-left: 1px solid rgba(255,255,255,.07);
+        border-top: none;
+    }
+    .service-flow-item:nth-child(n+4) .service-flow-card {
+        border-top: 1px solid rgba(255,255,255,.07);
+    }
+}
+
+@media (max-width: 640px) {
+    .service-flow-section {
+        padding: 48px 0 44px;
+    }
+    .service-flow-steps {
+        flex-direction: column;
+        gap: 0;
+        max-width: 100%;
+    }
+    .service-flow-item {
+        flex: none;
+        width: 100%;
+    }
+    .service-flow-card {
+        border-left: 1px solid rgba(255,255,255,.07);
+        border-top: 1px solid rgba(255,255,255,.07);
+        border-bottom: none;
+        padding: 24px 20px;
+    }
+    .service-flow-item:last-child .service-flow-card {
+        border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .service-flow-bg-num {
+        font-size: 60px;
+    }
+    .service-flow-arrow {
+        display: none;
+    }
+}
