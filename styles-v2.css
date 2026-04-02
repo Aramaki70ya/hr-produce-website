@@ -830,7 +830,7 @@ body.is-loaded .loading-screen {
 
 /* トップ — 事業セクション要約（詳細は business.html） */
 .business--teaser .business-three {
-    margin-bottom: 8px;
+    margin-bottom: 28px;
 }
 .business--teaser .biz-block {
     padding: 36px 28px 32px;
@@ -838,14 +838,46 @@ body.is-loaded .loading-screen {
 .business--teaser .biz-block-desc {
     margin-bottom: 0;
 }
+.business--teaser .biz-block-coming {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
 .business--teaser .biz-block-coming .biz-block-desc {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 .business--teaser .biz-block-coming .biz-coming-soon {
-    margin-top: 0;
+    margin-top: 12px;
+    padding-top: 8px;
 }
 .business--teaser .view-more-container {
-    margin-top: 40px;
+    margin-top: 0;
+    margin-bottom: 36px;
+}
+.business--teaser .marquee-row {
+    margin-top: 12px;
+    margin-bottom: 96px;
+}
+.business--teaser .marquee-container {
+    margin-top: 22px;
+}
+
+/* 事業セクション VIEW MORE — page-bg のスクロール連動で背景色が変わっても読めるよう黒ベース */
+#business .view-more-container .view-more-btn {
+    color: #1a1a1a;
+    border-color: rgba(26, 26, 26, 0.5);
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+#business .view-more-container .view-more-btn:hover {
+    background-color: #1a1a1a;
+    color: #f7c02d;
+    border-color: #1a1a1a;
+    box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.2);
+}
+#business .view-more-container .view-more-btn:hover::after {
+    color: #f7c02d;
 }
 
 /* 事業詳細ページ（business.html）— 明るいヒーロー（カーソル視認性・テキストは濃色） */
@@ -3048,12 +3080,12 @@ body::before {
     text-align: left;
 }
 
-/* ヒーローオーバーレイ — より立体的・スライドショーの上に */
+/* ヒーローオーバーレイ — スライドの明るさを活かしつつ文字の可読性を確保（人材サイト向けに過度な暗さを抑える） */
 .first-view-overlay {
     z-index: 2; /* slideshow(1)の上 */
     background:
-        linear-gradient(165deg, rgba(0, 0, 0, 0.65) 0%, rgba(13, 13, 13, 0.35) 60%, transparent 100%),
-        linear-gradient(to bottom, transparent 55%, rgba(13, 13, 13, 0.92) 100%);
+        linear-gradient(165deg, rgba(35, 35, 40, 0.38) 0%, rgba(20, 20, 24, 0.22) 55%, transparent 100%),
+        linear-gradient(to bottom, transparent 48%, rgba(18, 18, 22, 0.55) 100%);
 }
 
 /* 動画 — モーションテクスチャとして薄めに */
