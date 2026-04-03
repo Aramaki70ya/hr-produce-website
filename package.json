@@ -1,0 +1,7 @@
+{
+  "name": "hr-produce-site",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}

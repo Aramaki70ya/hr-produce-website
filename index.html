@@ -366,9 +366,6 @@
                         </ul>
                     </div>
 
-                    <div class="view-more-container">
-                        <a href="#" class="view-more-btn">VIEW MORE</a>
-                    </div>
                 </div>
             </div>
         </section>
@@ -396,9 +393,117 @@
                 <div class="contact-inner js-fade-up">
                     <h2 class="section-title">CONTACT</h2>
                     <p class="section-subtitle">お問い合わせ</p>
-                    <div class="contact-links">
-                        <a href="#" class="contact-btn">サービスについてのお問い合わせ</a>
-                        <a href="#" class="contact-btn white">採用についてのお問い合わせ</a>
+
+                    <!-- タブ切り替え -->
+                    <div class="contact-tabs">
+                        <button class="contact-tab-btn is-active" data-tab="service">サービスについてのお問い合わせ</button>
+                        <button class="contact-tab-btn" data-tab="recruit">採用についてのお問い合わせ</button>
+                    </div>
+
+                    <!-- サービスフォーム -->
+                    <div class="contact-form-wrap is-active" id="contact-form-service">
+                        <p class="form-status" role="status" aria-live="polite"></p>
+                        <form class="contact-form" name="contact-service" autocomplete="on">
+                            <div class="form-honeypot" aria-hidden="true">
+                                <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                            </div>
+                            <div class="form-row form-row--half">
+                                <div class="form-group">
+                                    <label class="form-label">お名前 <span class="form-required">必須</span></label>
+                                    <input type="text" name="name" class="form-input" placeholder="山田 太郎" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">会社名 <span class="form-required">必須</span></label>
+                                    <input type="text" name="company" class="form-input" placeholder="株式会社〇〇" required>
+                                </div>
+                            </div>
+                            <div class="form-row form-row--half">
+                                <div class="form-group">
+                                    <label class="form-label">メールアドレス <span class="form-required">必須</span></label>
+                                    <input type="email" name="email" class="form-input" placeholder="example@email.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">電話番号</label>
+                                    <input type="tel" name="phone" class="form-input" placeholder="03-0000-0000">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">ご用件 <span class="form-required">必須</span></label>
+                                <select name="subject" class="form-input form-select" required>
+                                    <option value="" disabled selected>お問い合わせ種別を選択してください</option>
+                                    <option value="キャリアプロデュース事業について">キャリアプロデュース事業について</option>
+                                    <option value="タレントプロデュース事業について">タレントプロデュース事業について</option>
+                                    <option value="その他サービスについて">その他サービスについて</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">お問い合わせ内容 <span class="form-required">必須</span></label>
+                                <textarea name="message" class="form-input form-textarea" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+                            </div>
+                            <div class="form-privacy">
+                                <label class="form-checkbox-label">
+                                    <input type="checkbox" name="agree_privacy" value="yes" class="form-checkbox" required>
+                                    <span><a href="#" class="form-privacy-link">プライバシーポリシー</a>に同意する</span>
+                                </label>
+                            </div>
+                            <div class="form-submit-wrap">
+                                <button type="submit" class="form-submit-btn">送信する →</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 採用フォーム -->
+                    <div class="contact-form-wrap" id="contact-form-recruit">
+                        <p class="form-status" role="status" aria-live="polite"></p>
+                        <form class="contact-form" name="contact-recruit" autocomplete="on">
+                            <div class="form-honeypot" aria-hidden="true">
+                                <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                            </div>
+                            <div class="form-row form-row--half">
+                                <div class="form-group">
+                                    <label class="form-label">お名前 <span class="form-required">必須</span></label>
+                                    <input type="text" name="name" class="form-input" placeholder="山田 太郎" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">現在の職種・業界</label>
+                                    <input type="text" name="current_job" class="form-input" placeholder="営業 / IT業界">
+                                </div>
+                            </div>
+                            <div class="form-row form-row--half">
+                                <div class="form-group">
+                                    <label class="form-label">メールアドレス <span class="form-required">必須</span></label>
+                                    <input type="email" name="email" class="form-input" placeholder="example@email.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">電話番号</label>
+                                    <input type="tel" name="phone" class="form-input" placeholder="090-0000-0000">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">希望する職種 <span class="form-required">必須</span></label>
+                                <select name="desired_role" class="form-input form-select" required>
+                                    <option value="" disabled selected>希望職種を選択してください</option>
+                                    <option value="キャリアアドバイザー">キャリアアドバイザー</option>
+                                    <option value="リクルーティングアドバイザー">リクルーティングアドバイザー</option>
+                                    <option value="法人営業">法人営業</option>
+                                    <option value="コーポレートスタッフ">コーポレートスタッフ</option>
+                                    <option value="その他・未定">その他・未定</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">ご質問・メッセージ</label>
+                                <textarea name="message" class="form-input form-textarea" placeholder="気になることや、あなたのことを教えてください"></textarea>
+                            </div>
+                            <div class="form-privacy">
+                                <label class="form-checkbox-label">
+                                    <input type="checkbox" name="agree_privacy" value="yes" class="form-checkbox" required>
+                                    <span><a href="#" class="form-privacy-link">プライバシーポリシー</a>に同意する</span>
+                                </label>
+                            </div>
+                            <div class="form-submit-wrap">
+                                <button type="submit" class="form-submit-btn">送信する →</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

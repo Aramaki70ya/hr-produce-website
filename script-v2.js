@@ -757,6 +757,118 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // V2: ヒーロー文字アニメーション強化（グローバルスコープの既存関数を拡張）
+// お問い合わせタブ切り替え
+(function initContactTabs() {
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabBtns = document.querySelectorAll('.contact-tab-btn');
+        const formWraps = document.querySelectorAll('.contact-form-wrap');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.tab;
+
+                tabBtns.forEach(b => b.classList.remove('is-active'));
+                formWraps.forEach(f => f.classList.remove('is-active'));
+
+                btn.classList.add('is-active');
+                const targetForm = document.getElementById(`contact-form-${target}`);
+                if (targetForm) targetForm.classList.add('is-active');
+            });
+        });
+    });
+})();
+
+// お問い合わせ → Vercel /api/contact 経由で Slack 通知
+(function initContactFormSubmit() {
+    document.addEventListener('DOMContentLoaded', () => {
+        const serviceForm = document.querySelector('form[name="contact-service"]');
+        const recruitForm = document.querySelector('form[name="contact-recruit"]');
+
+        async function handleSubmit(form, type) {
+            const statusEl = form.closest('.contact-form-wrap')?.querySelector('.form-status');
+            const btn = form.querySelector('.form-submit-btn');
+            const fd = new FormData(form);
+            const payload = {
+                type,
+                website: fd.get('website') || '',
+            };
+            if (type === 'service') {
+                Object.assign(payload, {
+                    name: fd.get('name'),
+                    company: fd.get('company'),
+                    email: fd.get('email'),
+                    phone: fd.get('phone') || '',
+                    subject: fd.get('subject'),
+                    message: fd.get('message'),
+                });
+            } else {
+                Object.assign(payload, {
+                    name: fd.get('name'),
+                    email: fd.get('email'),
+                    phone: fd.get('phone') || '',
+                    current_job: fd.get('current_job') || '',
+                    desired_role: fd.get('desired_role'),
+                    message: fd.get('message') || '',
+                });
+            }
+
+            if (statusEl) {
+                statusEl.textContent = '';
+                statusEl.classList.remove('is-error', 'is-success');
+            }
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                const json = await res.json().catch(() => ({}));
+                if (!res.ok || !json.ok) {
+                    throw new Error(json.error || '送信に失敗しました');
+                }
+                if (statusEl) {
+                    statusEl.textContent = '送信しました。お問い合わせありがとうございます。';
+                    statusEl.classList.add('is-success');
+                    statusEl.classList.remove('is-error');
+                }
+                form.reset();
+            } catch (err) {
+                if (statusEl) {
+                    statusEl.textContent =
+                        '送信できませんでした。時間をおいて再度お試しください。';
+                    statusEl.classList.add('is-error');
+                    statusEl.classList.remove('is-success');
+                }
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        if (serviceForm) {
+            serviceForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!serviceForm.checkValidity()) {
+                    serviceForm.reportValidity();
+                    return;
+                }
+                await handleSubmit(serviceForm, 'service');
+            });
+        }
+        if (recruitForm) {
+            recruitForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!recruitForm.checkValidity()) {
+                    recruitForm.reportValidity();
+                    return;
+                }
+                await handleSubmit(recruitForm, 'recruit');
+            });
+        }
+    });
+})();
+
 // startMainAnimations が呼ばれるタイミングで文字アニメをより立体的に
 (function patchHeroAnimation() {
     const _originalStart = window._v2StartPatched;

@@ -4076,3 +4076,284 @@ body::before {
         display: none;
     }
 }
+
+/* ==========================================================================
+   Contact Form
+   ========================================================================== */
+
+/* タブ */
+.contact-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 40px 0 48px;
+    flex-wrap: wrap;
+}
+
+.contact-tab-btn {
+    padding: 16px 36px;
+    border: 1px solid rgba(26, 26, 26, 0.35);
+    background: transparent;
+    color: #1a1a1a;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-tab-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #1a1a1a;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: 0;
+}
+
+.contact-tab-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-tab-btn.is-active,
+.contact-tab-btn:hover {
+    background: #1a1a1a;
+    color: #F7C02D;
+    border-color: #1a1a1a;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+/* フォームラップ */
+.contact-form-wrap {
+    display: none;
+    max-width: 760px;
+    margin: 0 auto;
+    animation: formFadeIn 0.4s ease forwards;
+}
+
+.contact-form-wrap.is-active {
+    display: block;
+}
+
+@keyframes formFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* フォーム内部 */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row--half > .form-group {
+    flex: 1;
+    min-width: 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-required {
+    display: inline-block;
+    font-size: 0.65rem;
+    background: #F7C02D;
+    color: #1a1a1a;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(26, 26, 26, 0.2);
+    border-radius: 2px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form-input::placeholder {
+    color: rgba(26, 26, 26, 0.35);
+}
+
+.form-input:focus {
+    border-color: #F7C02D;
+    box-shadow: 0 0 0 3px rgba(247, 192, 45, 0.18);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a1a1a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.7;
+}
+
+/* プライバシー同意 */
+.form-privacy {
+    display: flex;
+    justify-content: center;
+}
+
+.form-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: #1a1a1a;
+    cursor: pointer;
+}
+
+.form-checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: #F7C02D;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.form-privacy-link {
+    color: #1a1a1a;
+    border-bottom: 1px solid rgba(26,26,26,0.4);
+    transition: border-color 0.2s ease;
+}
+
+.form-privacy-link:hover {
+    border-color: #1a1a1a;
+}
+
+/* 送信ボタン */
+.form-submit-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.form-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 64px;
+    background: #1a1a1a;
+    color: #F7C02D;
+    border: none;
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.form-submit-btn:hover {
+    background: #2d2d2d;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15), 0 0 20px rgba(247,192,45,0.2);
+    transform: translateY(-2px);
+}
+
+.form-submit-btn:active {
+    transform: translateY(0);
+}
+
+.form-submit-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 送信結果メッセージ */
+.form-status {
+    min-height: 1.5em;
+    margin: 0 0 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.form-status.is-success {
+    color: #1a5c1a;
+}
+
+.form-status.is-error {
+    color: #8b1a1a;
+}
+
+/* ボット対策（非表示） */
+.form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+/* レスポンシブ */
+@media (max-width: 640px) {
+    .contact-tabs {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin: 28px 16px 36px;
+    }
+
+    .contact-tab-btn {
+        padding: 14px 20px;
+        font-size: 0.82rem;
+        text-align: center;
+    }
+
+    .form-row--half {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-submit-btn {
+        padding: 16px 40px;
+        width: 100%;
+        justify-content: center;
+    }
+}
