@@ -3605,6 +3605,19 @@ body::before {
     overflow: visible;
 }
 
+.mvv-section-title-wrap {
+    text-align: center;
+    padding: 64px 24px 0;
+}
+
+.mvv-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #b8924a;
+}
+
 .mvv-hero {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -3874,6 +3887,10 @@ body::before {
 .service-flow-header {
     text-align: center;
     margin-bottom: 48px;
+}
+
+.service-flow-header--second {
+    margin-top: 80px;
 }
 
 .service-flow-eyebrow {
@@ -4355,5 +4372,77 @@ body::before {
         padding: 16px 40px;
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* ========================================
+   CLIENTS セクション
+======================================== */
+.clients-section {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.clients-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.clients-en {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #b8924a;
+    margin: 0 0 8px;
+}
+
+.clients-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+
+.clients-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px 56px;
+}
+
+.clients-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 72px;
+}
+
+.clients-logo-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s;
+}
+
+.clients-logo-item img:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .clients-section {
+        padding: 56px 0;
+    }
+
+    .clients-logos {
+        gap: 28px 32px;
+    }
+
+    .clients-logo-item {
+        width: 120px;
+        height: 56px;
     }
 }
